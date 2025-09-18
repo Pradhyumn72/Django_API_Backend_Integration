@@ -2,4 +2,15 @@ asgiref==3.9.1
 Django==5.2.6
 djangorestframework==3.16.1
 sqlparse==0.5.3
-# tz 
+# tz
+# pip freeze > requirements.txt
+# deactivate
+# git add .
+# git commit -m "first commit" 
+# git remote add origin https://github.com/Pradhyumn72/Django_API_Backend_Integration.git
+# git branch -M main 
+# git remote -v  
+# origin  https://github.com/Pradhyumn72/Django_API_Backend_Integration.git (fetch)
+# origin  https://github.com/Pradhyumn72/Django_API_Backend_Integration.git (push)
+#  the above two links should come for eh successful integration
+#  git push origin main
