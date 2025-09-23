@@ -69,57 +69,57 @@ from rest_framework import viewsets
 #             data.delete()
 #             return JsonResponse({'msg':'Data Deleted'})
         
-@api_view(["GET","POST"])
-def stu_list(req):
-    if req.method == "GET":
-        snippets = Student.objects.all()
-        serializer = Student(snippets, many=True)
-        return Response(serializer.data)
-    elif req.method == "POST":
-        serializer = Student(data=req.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(["GET","POST"])
+# def stu_list(req):
+#     if req.method == "GET":
+#         snippets = Student.objects.all()
+#         serializer = Student(snippets, many=True)
+#         return Response(serializer.data)
+#     elif req.method == "POST":
+#         serializer = Student(data=req.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(["GET","PUT","PATCH","DELETE"])
-def stu_detail(req,pk):
-    if req.method=="GET":
-        snippet = Student.objects.get(id=pk)
-        serializer = Student(snippet)
-        return Response(serializer.data)
+# @api_view(["GET","PUT","PATCH","DELETE"])
+# def stu_detail(req,pk):
+#     if req.method=="GET":
+#         snippet = Student.objects.get(id=pk)
+#         serializer = Student(snippet)
+#         return Response(serializer.data)
 
-    elif req.method=="PUT":
-        snippet = Student.objects.get(id=pk)
-        serializer = Student(snippet, data=req.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif req.method=="PUT":
+#         snippet = Student.objects.get(id=pk)
+#         serializer = Student(snippet, data=req.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif req.method=="PATCH":
-        snippet = Student.objects.get(id=pk)
-        serializer = Student(snippet, data=req.data,partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif req.method=="PATCH":
+#         snippet = Student.objects.get(id=pk)
+#         serializer = Student(snippet, data=req.data,partial=True)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif req.method=="DELETE":
-        snippet = Student.objects.get(id=pk)
-        snippet.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     elif req.method=="DELETE":
+#         snippet = Student.objects.get(id=pk)
+#         snippet.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
         
         
 
 
 
-class StudentViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for viewing and editing accounts.
-    """
-    queryset = Studentt.objects.all()
-    serializer_class = Student
+# class StudentViewSet(viewsets.ModelViewSet):
+#     """
+#     A simple ViewSet for viewing and editing accounts.
+#     """
+#     queryset = Studentt.objects.all()
+#     serializer_class = Student
 
 
 
@@ -213,16 +213,36 @@ class StudentViewSet(viewsets.ModelViewSet):
 #     def delete(self, request, *args, **kwargs):
 #         return self.destroy(request, *args, **kwargs)
 
-from myapp.models import Studentt
-from myapp.serializers import Student
-from rest_framework import generics
+# from myapp.models import Studentt
+# from myapp.serializers import Student
+# from rest_framework import generics
 
 
-class SnippetList(generics.ListCreateAPIView):
+# class SnippetList(generics.ListCreateAPIView):
+#     queryset = Studentt.objects.all()
+#     serializer_class = Student
+
+
+# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Studentt.objects.all()
+#     serializer_class = Student
+
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing accounts.
+    """
+    # below line is for object level authentication .....when we don't write the things in settings.py
+    # authentication_classes = [SessionAuthentication, BasicAuthentication] 
+
+    permission_classes = [IsAuthenticated]
+
     queryset = Studentt.objects.all()
     serializer_class = Student
 
 
-class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Studentt.objects.all()
-    serializer_class = Student
+# setting.py se project level authentication
+# 
